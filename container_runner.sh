@@ -1,5 +1,6 @@
 #!/bin/bash
-CONTAINER_NAME=generic_container_1
+CONTAINER_NAME=generic_container_name
+DOCKER_IMAGE_NAME="generic_container_image"
 
 setfacl -m user:1000:r ${HOME}/.Xauthority
 dpkg -l | grep nvidia-container-toolkit &> /dev/null
@@ -7,7 +8,6 @@ HAS_NVIDIA_TOOLKIT=$?
 which nvidia-docker > /dev/null
 HAS_NVIDIA_DOCKER=$?
 
-DOCKER_IMAGE_NAME="gui_dev_nvidia"
 DOCKER_BASE_IMAGE="nvidia/opengl:1.2-glvnd-devel-ubuntu18.04"
 if [ $HAS_NVIDIA_TOOLKIT -eq 0 ]; then
   docker_version=`docker version --format '{{.Client.Version}}' | cut -d. -f1`
